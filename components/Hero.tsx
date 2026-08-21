@@ -65,12 +65,15 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* Lado Derecho - Imagen con tag HTML nativo */}
+        {/* Lado Derecho - Video en bucle */}
         <div className="w-full h-[400px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/60 bg-slate-200">
-          <img
-            src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop"
-            alt="Consultorio Creadent"
+          <video
+            src="/origami_tooth.mp4"
             className="w-full h-full object-cover block"
+            autoPlay
+            loop
+            muted
+            playsInline
           />
         </div>
 
