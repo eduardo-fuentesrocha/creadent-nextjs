@@ -12,11 +12,6 @@ export const About = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const badge = containerRef.current?.querySelector('.about-badge');
-    const title = containerRef.current?.querySelector('.about-title');
-    const image = containerRef.current?.querySelector('.about-image');
-    const cards = containerRef.current?.querySelectorAll('.about-card');
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -28,40 +23,34 @@ export const About = () => {
 
     // Entrada del badge superior
     tl.fromTo(
-      badge,
+      '.about-badge',
       { opacity: 0, y: -20 },
       { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
     );
 
-    // Animación suave de entrada del título principal (sin splitText)
-    if (title) {
-      tl.fromTo(
-        title,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        '-=0.3'
-      );
-    }
+    // Animación de entrada del título principal
+    tl.fromTo(
+      '.about-title',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+      '-=0.3'
+    );
 
     // Imagen principal
-    if (image) {
-      tl.fromTo(
-        image,
-        { opacity: 0, y: 50, scale: 0.96 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' },
-        '-=0.4'
-      );
-    }
+    tl.fromTo(
+      '.about-image',
+      { opacity: 0, y: 50, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' },
+      '-=0.4'
+    );
 
     // Tarjetas informativas
-    if (cards) {
-      tl.fromTo(
-        cards,
-        { opacity: 0, y: 30, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
-        '-=0.4'
-      );
-    }
+    tl.fromTo(
+      '.about-card',
+      { opacity: 0, y: 30, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
+      '-=0.4'
+    );
   }, { scope: containerRef });
 
   return (

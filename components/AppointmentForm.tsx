@@ -11,13 +11,6 @@ export const AppointmentForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const badge = containerRef.current?.querySelector('.contact-badge');
-    const title = containerRef.current?.querySelector('.contact-title');
-    const desc = containerRef.current?.querySelector('.contact-desc');
-    const info = containerRef.current?.querySelector('.contact-info');
-    const formInputs = containerRef.current?.querySelectorAll('.contact-input');
-    const button = containerRef.current?.querySelector('.contact-button');
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -29,50 +22,42 @@ export const AppointmentForm = () => {
 
     // Entrada del badge superior
     tl.fromTo(
-      badge,
+      '.contact-badge',
       { opacity: 0, y: -20 },
       { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
     );
 
-    // Animación suave de entrada del título principal (sin splitText)
-    if (title) {
-      tl.fromTo(
-        title,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-        '-=0.3'
-      );
-    }
+    // Entrada del título
+    tl.fromTo(
+      '.contact-title',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+      '-=0.3'
+    );
 
     // Descripción y datos de contacto
-    if (desc || info) {
-      tl.fromTo(
-        [desc, info],
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
-        '-=0.4'
-      );
-    }
+    tl.fromTo(
+      ['.contact-desc', '.contact-info'],
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
+      '-=0.4'
+    );
 
     // Entradas del formulario
-    if (formInputs) {
-      tl.fromTo(
-        formInputs,
-        { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
-        '-=0.4'
-      );
-    }
+    tl.fromTo(
+      '.contact-input',
+      { opacity: 0, y: 25 },
+      { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
+      '-=0.4'
+    );
 
     // Botón de envío
-    if (button) {
-      tl.fromTo(
-        button,
-        { opacity: 0, scale: 0.9 },
-        { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' },
-        '-=0.2'
-      );
-    }
+    tl.fromTo(
+      '.contact-button',
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' },
+      '-=0.2'
+    );
   }, { scope: containerRef });
 
   return (
