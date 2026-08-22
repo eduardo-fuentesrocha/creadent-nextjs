@@ -73,7 +73,7 @@ export const Footer = () => {
           {/* Lado Izquierdo - Logo y Marca */}
           <div className="lg:col-span-6 flex items-start gap-4">
             <div className="w-12 h-12 rounded-full bg-white text-[#4D12FF] flex items-center justify-center font-bold text-2xl shrink-0">
-              Cd
+              CD
             </div>
             <div>
               <h2 className="text-4xl md:text-5xl font-light font-normal tracking-tight">

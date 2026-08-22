@@ -15,7 +15,7 @@ const TRABAJOS = [
     frase:
       'Planificación digital personalizada y carillas de alta precisión para lograr una sonrisa armónica, natural y proporcional a tus facciones.',
     imageSrc: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1200&auto=format&fit=crop',
-    bgColor: '#4D12FF', // Mismo color base que ValoresSection
+    bgColor: '#4D12FF',
     textColor: '#FFFFFF',
     subtextColor: 'rgba(255, 255, 255, 0.7)',
     cardBg: 'rgba(255, 255, 255, 0.12)',
@@ -29,10 +29,10 @@ const TRABAJOS = [
     num: '2',
     titulo: 'Ortodoncia Invisible',
     frase:
-      'Alineación dental mediante alineadores transparentes, diseñados a medida para corregir tu postura dental de forma discreta y cómoda.',
+      'Alineadores transparentes diseñados a medida para corregir tu postura dental de forma discreta y cómoda.',
     imageSrc: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop',
-    bgColor: '#C2B8FF', // Fondo Lavanda Claro
-    textColor: '#4D12FF', // Ajustado al tono base unificado
+    bgColor: '#C2B8FF',
+    textColor: '#4D12FF',
     subtextColor: 'rgba(77, 18, 255, 0.7)',
     cardBg: 'rgba(255, 255, 255, 0.45)',
     cardBorder: 'rgba(77, 18, 255, 0.15)',
@@ -125,8 +125,8 @@ export const Services = () => {
 
       ScrollTrigger.create({
         trigger: block,
-        start: 'top 50%',
-        end: 'bottom 50%',
+        start: 'top 60%',
+        end: 'bottom 60%',
         onEnter: applyColorTransition,
         onEnterBack: applyColorTransition,
       });
@@ -134,7 +134,7 @@ export const Services = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: block,
-          start: 'top 75%',
+          start: 'top 80%',
           end: 'bottom 20%',
           toggleActions: 'play none none reverse',
         },
@@ -169,29 +169,29 @@ export const Services = () => {
   return (
     <section
       ref={containerRef}
-      id="trabajos"
-      style={{ backgroundColor: '#4D12FF' }} // Inicialización idéntica a ValoresSection
-      className="w-full py-24 px-6 md:px-16 relative z-10"
+      id="servicios"
+      style={{ backgroundColor: '#4D12FF' }}
+      className="w-full py-24 px-6 md:px-16 relative z-10 text-white"
     >
       <div className="max-w-7xl mx-auto space-y-44">
         {TRABAJOS.map((item) => (
           <div key={item.num} className="trabajo-block grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             <div className="lg:col-span-4 sticky top-28 flex items-baseline gap-2 z-20">
-              <span className="trabajo-num text-sm font-light">
+              <span className="trabajo-num text-sm font-light text-white/70">
                 {item.num}
               </span>
-              <h3 className="trabajo-title text-xl md:text-2xl font-light tracking-tight">
+              <h3 className="trabajo-title text-xl md:text-2xl font-light tracking-tight text-white">
                 {item.titulo}
               </h3>
             </div>
 
             <div className="lg:col-span-8 space-y-8">
-              <h2 className="trabajo-text text-2xl md:text-4xl font-light leading-relaxed tracking-tight">
+              <h2 className="trabajo-text text-3xl md:text-5xl font-light leading-tight tracking-tight text-white">
                 {item.frase}
               </h2>
 
-              <div className="trabajo-img relative w-full h-[320px] sm:h-[450px] md:h-[520px] rounded-3xl overflow-hidden border border-black/10 shadow-2xl">
+              <div className="trabajo-img relative w-full h-[320px] sm:h-[450px] md:h-[520px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                 <Image
                   src={item.imageSrc}
                   alt={item.titulo}
@@ -205,7 +205,7 @@ export const Services = () => {
                   {item.cards.map((text, idx) => (
                     <div
                       key={idx}
-                      className="trabajo-card p-6 md:p-8 rounded-3xl backdrop-blur-md border text-xs sm:text-sm font-light leading-relaxed shadow-lg"
+                      className="trabajo-card p-6 md:p-8 rounded-3xl backdrop-blur-md border border-white/20 bg-white/10 text-white text-xs sm:text-sm font-light leading-relaxed shadow-lg"
                     >
                       {text}
                     </div>

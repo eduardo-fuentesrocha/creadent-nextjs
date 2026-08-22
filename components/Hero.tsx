@@ -12,7 +12,7 @@ export const Hero = () => {
     () => {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-      // 1. Entrada desordenada estilo GSAP.com
+      // Entrada desordenada estilo GSAP.com
       tl.fromTo(
         '.hero-char',
         {
@@ -47,7 +47,6 @@ export const Hero = () => {
           ease: 'back.out(2)',
           stagger: { amount: 0.4, from: 'center' },
           onComplete: () => {
-            // Flotación continua
             gsap.to('.hero-shape', {
               y: '+=12',
               rotation: '+=15',
@@ -62,8 +61,7 @@ export const Hero = () => {
         '-=1.0'
       );
 
-      // 2. TRANSFORMACIÓN A SONRISA
-      // Deformación parabólica para formar el arco de sonrisa en la palabra objetivo
+      // TRANSFORMACIÓN A SONRISA
       const smileChars = gsap.utils.toArray<HTMLElement>('.smile-char');
       const total = smileChars.length;
 
@@ -74,14 +72,11 @@ export const Hero = () => {
           ease: 'back.out(1.8)',
           stagger: 0.03,
           y: (i) => {
-            // Distancia normalizada desde el centro (-1 a 1)
             const x = (i / (total - 1)) * 2 - 1;
-            // Curva parabólica suave que arquea las letras hacia abajo en los extremos
             return Math.pow(x, 2) * -32 + 32;
           },
           rotation: (i) => {
             const x = (i / (total - 1)) * 2 - 1;
-            // Ángulo tangencial para seguir la curvatura
             return x * -22;
           },
         },
@@ -110,7 +105,7 @@ export const Hero = () => {
     return text.split('').map((char, index) => (
       <span
         key={index}
-        className={`hero-char ${isSmile ? 'smile-char' : ''} inline-block my-1`}
+        className={`hero-char ${isSmile ? 'smile-char' : ''} inline-block my-0.5`}
         style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}
       >
         {char === ' ' ? '\u00A0' : char}
@@ -121,10 +116,10 @@ export const Hero = () => {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen bg-[#4D12FF] text-white flex flex-col items-center justify-center overflow-hidden"
+      className="relative w-full min-h-[100dvh] bg-[#4D12FF] text-white flex flex-col items-center justify-center overflow-hidden px-4"
     >
-      {/* Fondo con Haces de Luz SVG */}
-      <div className="absolute inset-0 pointer-events-none flex justify-center items-start pt-10">
+      {/* Fondo con Haces de Luz SVG (posicionado absolutamente sin interferir en flex) */}
+      <div className="absolute inset-0 pointer-events-none flex justify-center items-start">
         <svg viewBox="0 0 1000 800" fill="none" className="w-full max-w-5xl h-full opacity-30">
           <path className="light-beam" d="M 450 0 L 250 800 L 380 800 Z" fill="url(#lightGradient)" />
           <path className="light-beam" d="M 550 0 L 620 800 L 750 800 Z" fill="url(#lightGradient)" />
@@ -137,14 +132,14 @@ export const Hero = () => {
         </svg>
       </div>
 
-      {/* Contenido Principal */}
-      <div className="relative z-10 text-center px-6 max-w-5xl select-none flex flex-col items-center">
+      {/* Contenido Principal perfectamente centrado */}
+      <div className="relative z-10 text-center select-none flex flex-col items-center justify-center -mt-6">
         
-        {/* Línea 1: Diseñamos tu mejor */}
-        <div className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight flex items-center justify-center gap-3 flex-wrap">
+        {/* Línea 1: "Diseñamos tu mejor" (Ajustado para que quepa en un solo renglón en móviles) */}
+        <div className="text-2xl sm:text-5xl md:text-7xl font-light tracking-tight flex items-center justify-center gap-1.5 sm:gap-3 whitespace-nowrap">
           <span>{splitText('Diseñamos')}</span>
           
-          <span className="hero-shape inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 text-yellow-300">
+          <span className="hero-shape inline-flex items-center justify-center w-5 h-5 sm:w-10 sm:h-10 text-yellow-300 mx-0.5">
             <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
               <path d="M50 0 C50 25 25 50 0 50 C25 50 50 75 50 100 C50 75 75 50 100 50 C75 50 50 25 50 0 Z" />
             </svg>
@@ -154,9 +149,9 @@ export const Hero = () => {
           <span>{splitText('mejor')}</span>
         </div>
 
-        {/* Línea 2: "sonrisa" (Blanca, más gruesa) */}
-        <div className="relative mt-2">
-          <h1 className="text-6xl sm:text-8xl md:text-9xl font-semibold tracking-tight text-white flex justify-center items-center">
+        {/* Línea 2: "sonrisa" */}
+        <div className="relative mt-1 sm:mt-3">
+          <h1 className="text-5xl sm:text-8xl md:text-9xl font-semibold tracking-tight text-white flex justify-center items-center">
             {splitText('sonrisa', true)}
           </h1>
         </div>
@@ -164,13 +159,13 @@ export const Hero = () => {
       </div>
 
       {/* Menú Flotante Inferior */}
-      <div className="floating-nav fixed bottom-8 z-50">
-        <nav className="flex items-center gap-6 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl text-xs sm:text-sm font-light text-white">
+      <div className="floating-nav fixed bottom-6 sm:bottom-8 z-50">
+        <nav className="flex items-center gap-4 sm:gap-6 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl text-xs sm:text-sm font-light text-white">
           <Link
             href="/"
-            className="w-7 h-7 rounded-full bg-white text-[#4D12FF] flex items-center justify-center font-bold text-base hover:scale-105 transition-transform"
+            className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white text-[#4D12FF] flex items-center justify-center font-bold text-sm sm:text-base hover:scale-105 transition-transform"
           >
-            T
+            CD
           </Link>
           <Link href="#servicios" className="hover:text-white/70 transition-colors">
             Servicios
