@@ -4,79 +4,98 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { ArrowRight, Instagram, ShieldCheck } from 'lucide-react';
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    gsap.fromTo(
-      '.hero-text-animate',
-      { opacity: 0, y: 25 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power2.out',
-        clearProps: 'all',
-      }
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // 1. Animación de revelado del título central
+    tl.fromTo(
+      '.hero-title',
+      { opacity: 0, y: 40, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 1.2 }
+    );
+
+    // 2. Animación de los haces de luz SVG en el fondo
+    tl.fromTo(
+      '.light-beam',
+      { opacity: 0, scaleY: 0, transformOrigin: 'top center' },
+      { opacity: 0.25, scaleY: 1, duration: 1.4, stagger: 0.2 },
+      '-=0.8'
+    );
+
+    // 3. Entrada suave del menú flotante inferior
+    tl.fromTo(
+      '.floating-nav',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.8 },
+      '-=0.6'
     );
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} id="inicio" className="relative pt-32 pb-20 px-6 md:px-12 bg-slate-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
-        {/* Lado Izquierdo - Texto */}
-        <div className="flex flex-col items-start">
-          <div className="hero-text-animate inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200/60 text-teal-700 text-xs font-semibold mb-6">
-            <ShieldCheck className="w-4 h-4 text-teal-600" />
-            <span>ODONTOLOGÍA DE ALTA PRECISIÓN</span>
-          </div>
-
-          <h1 className="hero-text-animate text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6">
-            Diseñamos la sonrisa <br className="hidden sm:inline" />
-            <span className="text-teal-600">que siempre soñaste.</span>
-          </h1>
-
-          <p className="hero-text-animate text-slate-600 text-lg leading-relaxed mb-8 max-w-xl">
-            En Creadent combinamos tecnología de vanguardia y estética dental personalizada para brindarte una salud bucal impecable y libre de estrés.
-          </p>
-
-          <div className="hero-text-animate flex flex-wrap items-center gap-4">
-            <Link
-              href="#contacto"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-teal-600 text-white font-medium hover:bg-teal-700 transition-colors shadow-md shadow-teal-600/20"
-            >
-              <span>Agenda tu Valoración</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-slate-700 font-medium border border-slate-200 hover:bg-slate-50 transition-colors shadow-sm"
-            >
-              <Instagram className="w-4 h-4 text-pink-600" />
-              <span>Ver Resultados (@creadentmx)</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Lado Derecho - Video en bucle */}
-        <div className="w-full h-[400px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-slate-200/60 bg-slate-200">
-          <video
-            src="/origami_tooth.mp4"
-            className="w-full h-full object-cover block"
-            autoPlay
-            loop
-            muted
-            playsInline
+    <section
+      ref={containerRef}
+      className="relative w-full h-screen bg-[#4D12FF] text-white flex flex-col items-center justify-center overflow-hidden"
+    >
+      {/* Fondo con Haces de Luz SVG */}
+      <div className="absolute inset-0 pointer-events-none flex justify-center items-start pt-10">
+        <svg
+          viewBox="0 0 1000 800"
+          fill="none"
+          className="w-full max-w-5xl h-full opacity-30"
+        >
+          {/* Luz Izquierda */}
+          <path
+            className="light-beam"
+            d="M 450 0 L 250 800 L 380 800 Z"
+            fill="url(#lightGradient)"
           />
-        </div>
+          {/* Luz Derecha */}
+          <path
+            className="light-beam"
+            d="M 550 0 L 620 800 L 750 800 Z"
+            fill="url(#lightGradient)"
+          />
 
+          <defs>
+            <linearGradient id="lightGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      {/* Contenido Principal / Título */}
+      <div className="relative z-10 text-center px-6 max-w-4xl">
+        <h1 className="hero-title text-4xl sm:text-6xl md:text-7xl font-light tracking-tight leading-[1.15]">
+          Diseñamos tu <br />
+          mejor sonrisa
+        </h1>
+      </div>
+
+      {/* Menú Flotante Inferior (Floating Nav) */}
+      <div className="floating-nav fixed bottom-8 z-50">
+        <nav className="flex items-center gap-6 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl text-xs sm:text-sm font-light text-white">
+          <Link
+            href="/"
+            className="w-7 h-7 rounded-full bg-white text-[#4D12FF] flex items-center justify-center font-bold text-base hover:scale-105 transition-transform"
+          >
+            T
+          </Link>
+          <Link href="#servicios" className="hover:text-white/70 transition-colors">
+            Servicios
+          </Link>
+          <Link href="#nosotros" className="hover:text-white/70 transition-colors">
+            Nosotros
+          </Link>
+          <Link href="#contacto" className="hover:text-white/70 transition-colors">
+            Contacto
+          </Link>
+        </nav>
       </div>
     </section>
   );
