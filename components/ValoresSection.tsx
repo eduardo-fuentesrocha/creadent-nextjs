@@ -34,7 +34,6 @@ export const ValoresSection = () => {
   useGSAP(() => {
     const slides = gsap.utils.toArray<HTMLElement>('.valor-slide');
 
-    // Estado inicial de los slides
     gsap.set(slides[0], { opacity: 1, y: 0 });
     gsap.set(slides.slice(1), { opacity: 0, y: 30 });
 
@@ -51,10 +50,9 @@ export const ValoresSection = () => {
     slides.forEach((slide, i) => {
       const currentShapes = slide.querySelectorAll('.svg-shape');
 
-      // 1. Animación de expansión / desdoblamiento del SVG
       tl.fromTo(
         currentShapes,
-        { opacity: 0, x: -40, scale: 0.85, transformOrigin: 'left center' },
+        { opacity: 0, x: -20, scale: 0.85, transformOrigin: 'left center' },
         {
           opacity: 0.8,
           x: 0,
@@ -66,7 +64,6 @@ export const ValoresSection = () => {
         i === 0 ? 0 : '<'
       );
 
-      // 2. Transición al siguiente slide
       if (slides[i + 1]) {
         tl.to(
           slide,
@@ -85,24 +82,24 @@ export const ValoresSection = () => {
 
   return (
     <section ref={containerRef} className="relative w-full h-screen bg-[#4D12FF] text-white overflow-hidden z-10">
-      <span className="absolute top-8 left-8 text-sm font-light text-white/80 z-20">
+      <span className="absolute top-6 left-6 md:top-8 md:left-8 text-xs md:text-sm font-light text-white/80 z-20">
         Nuestros valores
       </span>
 
       {VALORES.map((val, index) => (
         <div
           key={index}
-          className="valor-slide absolute inset-0 w-full h-full flex flex-col justify-between p-8 md:p-16"
+          className="valor-slide absolute inset-0 w-full h-full flex flex-col justify-between p-6 md:p-16"
         >
-          {/* Frase Principal */}
-          <div className="max-w-3xl ml-auto pt-16">
-            <h2 className="text-3xl md:text-5xl font-light leading-tight tracking-tight">
+          {/* Frase Principal - Tamaño responsivo ajustado */}
+          <div className="max-w-3xl ml-auto pt-12 md:pt-16 z-10">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-light leading-tight tracking-tight">
               {val.frase}
             </h2>
           </div>
 
-          {/* SVG Animado por Capas */}
-          <div className="absolute left-10 md:left-20 top-1/2 -translate-y-1/2 w-[350px] md:w-[500px] h-72 pointer-events-none">
+          {/* SVG Animado - Posicionamiento adaptativo y dimensiones responsivas */}
+          <div className="absolute left-6 md:left-20 top-1/2 -translate-y-1/2 w-[260px] sm:w-[350px] md:w-[500px] h-48 md:h-72 pointer-events-none z-0 opacity-90">
             {val.type === 'cards' && (
               <svg viewBox="0 0 500 300" className="w-full h-full fill-white/5 stroke-white/40 stroke-[1.5]">
                 <rect className="svg-shape" x="30" y="30" width="140" height="220" rx="36" />
@@ -131,11 +128,11 @@ export const ValoresSection = () => {
           </div>
 
           {/* Título e Información Inferior */}
-          <div className="grid grid-cols-1 md:grid-cols-2 items-end w-full pb-4 z-10">
-            <h3 className="text-5xl md:text-7xl font-light tracking-tight">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-end w-full pb-2 md:pb-4 z-10 gap-2">
+            <h3 className="text-4xl sm:text-5xl md:text-7xl font-light tracking-tight">
               {val.titulo}
             </h3>
-            <p className="text-xs md:text-sm text-white/80 max-w-sm ml-auto leading-relaxed">
+            <p className="text-[11px] sm:text-xs md:text-sm text-white/80 max-w-sm md:ml-auto leading-relaxed">
               {val.descripcion}
             </p>
           </div>

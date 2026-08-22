@@ -15,8 +15,8 @@ const TRABAJOS = [
     frase:
       'Planificación digital personalizada y carillas de alta precisión para lograr una sonrisa armónica, natural y proporcional a tus facciones.',
     imageSrc: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1200&auto=format&fit=crop',
-    bgColor: '#4D12FF', // Azul / Violeta eléctrico saturado de fondo
-    textColor: '#FFFFFF', // Texto blanco
+    bgColor: '#4D12FF', // Mismo color base que ValoresSection
+    textColor: '#FFFFFF',
     subtextColor: 'rgba(255, 255, 255, 0.7)',
     cardBg: 'rgba(255, 255, 255, 0.12)',
     cardBorder: 'rgba(255, 255, 255, 0.25)',
@@ -32,14 +32,14 @@ const TRABAJOS = [
       'Alineación dental mediante alineadores transparentes, diseñados a medida para corregir tu postura dental de forma discreta y cómoda.',
     imageSrc: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop',
     bgColor: '#C2B8FF', // Fondo Lavanda Claro
-    textColor: '#3B00ED', // Texto Violeta Eléctrico (Mismo color del servicio 1)
-    subtextColor: 'rgba(59, 0, 237, 0.7)',
+    textColor: '#4D12FF', // Ajustado al tono base unificado
+    subtextColor: 'rgba(77, 18, 255, 0.7)',
     cardBg: 'rgba(255, 255, 255, 0.45)',
-    cardBorder: 'rgba(59, 0, 237, 0.15)',
+    cardBorder: 'rgba(77, 18, 255, 0.15)',
     cards: [
-    'Tratamiento 100% estético sin brackets metálicos, totalmente extraíble para facilitar tu higiene diaria y alimentación.',
-    'Planificación con escaneo 3D para predecir el movimiento exacto de tus dientes y reducir el tiempo en consulta.',
-  ],
+      'Tratamiento 100% estético sin brackets metálicos, totalmente extraíble para facilitar tu higiene diaria y alimentación.',
+      'Planificación con escaneo 3D para predecir el movimiento exacto de tus dientes y reducir el tiempo en consulta.',
+    ],
   },
   {
     num: '3',
@@ -47,8 +47,8 @@ const TRABAJOS = [
     frase:
       'Aclarado clínico seguro y eficaz diseñado para devolver el brillo y tono natural a tus dientes sin comprometer la salud del esmalte.',
     imageSrc: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop',
-    bgColor: '#4D12FF', // Fondo Azul / Violeta eléctrico
-    textColor: '#FFFFFF', // Texto blanco
+    bgColor: '#4D12FF',
+    textColor: '#FFFFFF',
     subtextColor: 'rgba(255, 255, 255, 0.7)',
     cardBg: 'rgba(255, 255, 255, 0.12)',
     cardBorder: 'rgba(255, 255, 255, 0.25)',
@@ -63,15 +63,15 @@ const TRABAJOS = [
     frase:
       'Reemplazo fijo de piezas dentales mediante fijaciones biocompatibles que devuelven la firmeza, funcionalidad y estética natural a tu boca.',
     imageSrc: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop',
-    bgColor: '#C2B8FF', // Fondo Lavanda Claro
-    textColor: '#3B00ED', // Texto Violeta Eléctrico
-    subtextColor: 'rgba(59, 0, 237, 0.7)',
+    bgColor: '#C2B8FF',
+    textColor: '#4D12FF',
+    subtextColor: 'rgba(77, 18, 255, 0.7)',
     cardBg: 'rgba(255, 255, 255, 0.45)',
-    cardBorder: 'rgba(59, 0, 237, 0.15)',
+    cardBorder: 'rgba(77, 18, 255, 0.15)',
     cards: [
-    'Materiales de titanio o zirconio altamente biocompatibles que garantizan una integración ósea estable y duradera.',
-    'Planificación con cirugía guiada en 3D para una colocación precisa, minimizando las molestias posteriores.',
-  ],
+      'Materiales de titanio o zirconio altamente biocompatibles que garantizan una integración ósea estable y duradera.',
+      'Planificación con cirugía guiada en 3D para una colocación precisa, minimizando las molestias posteriores.',
+    ],
   },
 ];
 
@@ -90,7 +90,6 @@ export const Services = () => {
       const cards = block.querySelectorAll('.trabajo-card');
 
       const applyColorTransition = () => {
-        // Transición de fondo
         gsap.to(containerRef.current, {
           backgroundColor: data.bgColor,
           duration: 0.7,
@@ -98,7 +97,6 @@ export const Services = () => {
           overwrite: 'auto',
         });
 
-        // Transición exact del color de la tipografía (#3B00ED o #FFFFFF)
         gsap.to([title, text], {
           color: data.textColor,
           duration: 0.7,
@@ -113,7 +111,6 @@ export const Services = () => {
           overwrite: 'auto',
         });
 
-        // Transición de las tarjetas translúcidas
         if (cards.length > 0) {
           gsap.to(cards, {
             color: data.textColor,
@@ -134,7 +131,6 @@ export const Services = () => {
         onEnterBack: applyColorTransition,
       });
 
-      // Animaciones de revelado
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: block,
@@ -174,14 +170,13 @@ export const Services = () => {
     <section
       ref={containerRef}
       id="trabajos"
-      style={{ backgroundColor: '#3B00ED' }}
+      style={{ backgroundColor: '#4D12FF' }} // Inicialización idéntica a ValoresSection
       className="w-full py-24 px-6 md:px-16 relative z-10"
     >
       <div className="max-w-7xl mx-auto space-y-44">
         {TRABAJOS.map((item) => (
           <div key={item.num} className="trabajo-block grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* Columna Izquierda Sticky */}
             <div className="lg:col-span-4 sticky top-28 flex items-baseline gap-2 z-20">
               <span className="trabajo-num text-sm font-light">
                 {item.num}
@@ -191,11 +186,10 @@ export const Services = () => {
               </h3>
             </div>
 
-            {/* Columna Derecha - Tipografía unificada a Sans-serif */}
             <div className="lg:col-span-8 space-y-8">
-              <p className="trabajo-text text-2xl md:text-4xl font-sans font-light leading-relaxed tracking-tight">
+              <h2 className="trabajo-text text-2xl md:text-4xl font-light leading-relaxed tracking-tight">
                 {item.frase}
-              </p>
+              </h2>
 
               <div className="trabajo-img relative w-full h-[320px] sm:h-[450px] md:h-[520px] rounded-3xl overflow-hidden border border-black/10 shadow-2xl">
                 <Image
