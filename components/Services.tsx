@@ -14,7 +14,7 @@ const TRABAJOS = [
     titulo: 'Diseño de Sonrisa',
     frase:
       'Planificación digital personalizada y carillas de alta precisión para lograr una sonrisa armónica, natural y proporcional a tus facciones.',
-    imageSrc: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: '/1.jpeg',
     bgColor: '#4D12FF',
     textColor: '#FFFFFF',
     subtextColor: 'rgba(255, 255, 255, 0.7)',
@@ -30,7 +30,7 @@ const TRABAJOS = [
     titulo: 'Ortodoncia Invisible',
     frase:
       'Alineadores transparentes diseñados a medida para corregir tu postura dental de forma discreta y cómoda.',
-    imageSrc: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: '/2.jpeg',
     bgColor: '#C2B8FF',
     textColor: '#4D12FF',
     subtextColor: 'rgba(77, 18, 255, 0.7)',
@@ -46,7 +46,7 @@ const TRABAJOS = [
     titulo: 'Blanqueamiento Dental',
     frase:
       'Aclarado clínico seguro y eficaz diseñado para devolver el brillo y tono natural a tus dientes sin comprometer la salud del esmalte.',
-    imageSrc: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: '/3.jpeg',
     bgColor: '#4D12FF',
     textColor: '#FFFFFF',
     subtextColor: 'rgba(255, 255, 255, 0.7)',
@@ -62,7 +62,7 @@ const TRABAJOS = [
     titulo: 'Implantes',
     frase:
       'Reemplazo fijo de piezas dentales mediante fijaciones biocompatibles que devuelven la firmeza, funcionalidad y estética natural a tu boca.',
-    imageSrc: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop',
+    imageSrc: '/4.jpeg',
     bgColor: '#C2B8FF',
     textColor: '#4D12FF',
     subtextColor: 'rgba(77, 18, 255, 0.7)',

@@ -72,21 +72,21 @@ export const AppointmentForm = () => {
         <div className="lg:col-span-5 space-y-8 sticky top-28">
           <div className="contact-badge flex items-center gap-2">
             <span className="text-xs md:text-sm font-light uppercase tracking-wider text-white/70">
-              03 / Contacto
+              Contacto
             </span>
           </div>
 
           <h2 className="contact-title text-3xl md:text-6xl font-light leading-tight tracking-tight text-white">
-            Iniciemos un proyecto juntos.
+            No dejes tu salud bucal para después.
           </h2>
 
           <p className="contact-desc text-xs sm:text-sm font-light text-white/80 leading-relaxed max-w-md">
-            Cuéntanos sobre tus requerimientos clínicos o consultas técnicas. Nuestro equipo responderá a la brevedad.
+            Agenda tu cita esta semana y luce una sonrisa perfecta.
           </p>
 
           <div className="contact-info space-y-2 pt-4 text-xs md:text-sm font-light text-white/80">
-            <p>contacto@creadent.com</p>
-            <p>+52 (442) 000-0000</p>
+            <p>creadent@gmail.com</p>
+            <p>466 663 33 72</p>
           </div>
         </div>
 

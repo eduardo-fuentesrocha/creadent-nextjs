@@ -77,13 +77,15 @@ export const About = () => {
 
         {/* Imagen representativa */}
         <div className="about-image relative w-full h-[320px] sm:h-[450px] md:h-[550px] rounded-3xl overflow-hidden border border-[#4D12FF]/15 shadow-2xl">
-          <Image
-            src="https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=1200&auto=format&fit=crop"
-            alt="Laboratorio Dental Creadent"
-            fill
-            className="object-cover"
-          />
-        </div>
+  <video
+    src="/creadent.mp4"
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="w-full h-full object-cover"
+  />
+</div>
 
         {/* Tarjetas de pilares */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">

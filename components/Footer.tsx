@@ -99,7 +99,7 @@ export const Footer = () => {
                 Email
               </span>
               <a href="mailto:contacto@taravillalab.com" className="hover:underline">
-                creadentmx@gmail.com
+                creadent@gmail.com
               </a>
             </div>
 
@@ -134,11 +134,11 @@ export const Footer = () => {
 
           {/* Menú Legal & Redes */}
           <div className="flex items-center gap-6">
-            <Link href="#metodo" className="hover:text-white transition-colors">
-              Método
+            <Link href="#servicios" className="hover:text-white transition-colors">
+              Servicios
             </Link>
-            <Link href="#trabajos" className="hover:text-white transition-colors">
-              Trabajos
+            <Link href="#nosotros" className="hover:text-white transition-colors">
+              Nosotros
             </Link>
             <Link href="#contacto" className="hover:text-white transition-colors">
               Contacto
