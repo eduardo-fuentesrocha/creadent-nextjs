@@ -1,64 +1,94 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, FormEvent } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { MessageCircle } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 export const AppointmentForm = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top 75%',
-        end: 'bottom 20%',
-        toggleActions: 'play none none reverse',
-      },
-    });
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    message: '',
+  });
 
-    // Entrada del badge superior
-    tl.fromTo(
-      '.contact-badge',
-      { opacity: 0, y: -20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-    );
+  const WHATSAPP_NUMBER = '524662134317';
 
-    // Entrada del título
-    tl.fromTo(
-      '.contact-title',
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
-      '-=0.3'
-    );
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 75%',
+          end: 'bottom 20%',
+          toggleActions: 'play none none reverse',
+        },
+      });
 
-    // Descripción y datos de contacto
-    tl.fromTo(
-      ['.contact-desc', '.contact-info'],
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
-      '-=0.4'
-    );
+      tl.fromTo(
+        '.contact-badge',
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+      )
+        .fromTo(
+          '.contact-title',
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' },
+          '-=0.3'
+        )
+        .fromTo(
+          ['.contact-desc', '.contact-info'],
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
+          '-=0.4'
+        )
+        .fromTo(
+          '.contact-input',
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
+          '-=0.4'
+        )
+        .fromTo(
+          '.contact-button',
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' },
+          '-=0.2'
+        );
+    },
+    { scope: containerRef }
+  );
 
-    // Entradas del formulario
-    tl.fromTo(
-      '.contact-input',
-      { opacity: 0, y: 25 },
-      { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' },
-      '-=0.4'
-    );
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    // Botón de envío
-    tl.fromTo(
-      '.contact-button',
-      { opacity: 0, scale: 0.9 },
-      { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.7)' },
-      '-=0.2'
-    );
-  }, { scope: containerRef });
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Construcción del mensaje prellenado
+    const text = `Hola Creadent, mi nombre es *${formData.name}*.\n` +
+      `Correo: ${formData.email}\n` +
+      `Consulta: ${formData.message}`;
+
+    const encodedText = encodeURIComponent(text);
+    
+    // Abre WhatsApp Web o la App directamente
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`, '_blank');
+  };
 
   return (
     <section
@@ -83,16 +113,11 @@ export const AppointmentForm = () => {
           <p className="contact-desc text-xs sm:text-sm font-light text-white/80 leading-relaxed max-w-md">
             Agenda tu cita esta semana y luce una sonrisa perfecta.
           </p>
-
-          <div className="contact-info space-y-2 pt-4 text-xs md:text-sm font-light text-white/80">
-            <p>creadent@gmail.com</p>
-            <p>466 663 33 72</p>
-          </div>
         </div>
 
         {/* Columna Derecha: Formulario */}
         <div className="lg:col-span-7 backdrop-blur-md bg-white/10 border border-white/20 p-8 md:p-12 rounded-3xl shadow-2xl space-y-6">
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             
             <div className="contact-input space-y-2">
               <label className="text-xs uppercase tracking-wider font-light text-white/80 block">
@@ -100,7 +125,11 @@ export const AppointmentForm = () => {
               </label>
               <input
                 type="text"
-                placeholder="Dr. Alejandro Morales"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder="Alejandra Morales"
                 className="w-full bg-white/5 border border-white/20 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors"
               />
             </div>
@@ -111,7 +140,11 @@ export const AppointmentForm = () => {
               </label>
               <input
                 type="email"
-                placeholder="contacto@tuclinica.com"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="alemorales@gmail.com"
                 className="w-full bg-white/5 border border-white/20 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors"
               />
             </div>
@@ -122,16 +155,21 @@ export const AppointmentForm = () => {
               </label>
               <textarea
                 rows={4}
-                placeholder="Detalla tu requerimiento o tipo de prótesis..."
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                placeholder="Detalla tu requerimiento o tipo de consulta..."
                 className="w-full bg-white/5 border border-white/20 rounded-2xl px-5 py-4 text-sm text-white placeholder-white/40 focus:outline-none focus:border-white transition-colors resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="contact-button w-full py-4 px-8 rounded-full bg-white text-[#4D12FF] font-medium text-sm hover:bg-[#C2B8FF] transition-colors duration-300 shadow-lg"
+              className="contact-button w-full py-4 px-8 rounded-full bg-white text-[#4D12FF] font-medium text-sm hover:bg-[#C2B8FF] transition-colors duration-300 shadow-lg flex items-center justify-center gap-2"
             >
-              Enviar Mensaje
+              <MessageCircle className="w-4 h-4" />
+              <span>Enviar mensaje por WhatsApp</span>
             </button>
 
           </form>

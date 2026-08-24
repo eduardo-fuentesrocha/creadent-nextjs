@@ -6,30 +6,51 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUp, MessageCircle } from 'lucide-react';
+import { LogoCompleto } from './LogoCompleto';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Footer = () => {
   const containerRef = useRef<HTMLElement>(null);
 
-  useGSAP(() => {
-    // Animación de aparición de las luces al llegar al Footer
-    gsap.fromTo(
-      '.footer-light-beam',
-      { opacity: 0, scaleY: 0, transformOrigin: 'top center' },
-      {
-        opacity: 0.2,
-        scaleY: 1,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: 'power3.out',
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: 'top 80%',
+          start: 'top 75%',
         },
-      }
-    );
-  }, { scope: containerRef });
+      });
+
+      // 1. Animación de las luces de fondo
+      tl.fromTo(
+        '.footer-light-beam',
+        { opacity: 0, scaleY: 0, transformOrigin: 'top center' },
+        {
+          opacity: 0.2,
+          scaleY: 1,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: 'power3.out',
+        }
+      );
+
+      // 2. Animación del Logo Completo (Escala + Opacidad)
+      tl.fromTo(
+        '.footer-logo-full',
+        { scale: 0.9, opacity: 0, y: 15 },
+        {
+          scale: 1,
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+        },
+        '-=0.8'
+      );
+    },
+    { scope: containerRef }
+  );
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -68,21 +89,11 @@ export const Footer = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Fila Principal / Grid de Información */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-20 items-center">
           
-          {/* Lado Izquierdo - Logo y Marca */}
-          <div className="lg:col-span-6 flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-white text-[#4D12FF] flex items-center justify-center font-bold text-2xl shrink-0">
-              CD
-            </div>
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light font-normal tracking-tight">
-                Creadent
-              </h2>
-              <p className="text-sm text-white/70 mt-1 font-light">
-                Clínica Dental
-              </p>
-            </div>
+          {/* Lado Izquierdo - Logo Completo Centrado */}
+          <div className="lg:col-span-6 flex items-center justify-center lg:justify-center">
+            <LogoCompleto className="footer-logo-full w-48 sm:w-64 md:w-72 h-auto text-white" />
           </div>
 
           {/* Lado Derecho - Datos de Contacto y Ubicaciones */}
@@ -96,9 +107,9 @@ export const Footer = () => {
               </a>
 
               <span className="block text-[10px] tracking-widest text-white/50 uppercase mb-2 mt-6">
-                Email
+                Correo Electrónico
               </span>
-              <a href="mailto:contacto@taravillalab.com" className="hover:underline">
+              <a href="mailto:creadent@gmail.com" className="hover:underline">
                 creadent@gmail.com
               </a>
             </div>
@@ -107,10 +118,15 @@ export const Footer = () => {
               <span className="block text-[10px] tracking-widest text-white/50 uppercase mb-2">
                 Laboratorio
               </span>
-              <p className="leading-relaxed">
+              <a
+                href="https://maps.app.goo.gl/LfVn1UBQNz8jQAxW7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="leading-relaxed hover:underline block"
+              >
                 Benito Juárez 607, Centro, 38900<br />
                 Salvatierra, Guanajuato (México)
-              </p>
+              </a>
             </div>
           </div>
 
@@ -129,27 +145,35 @@ export const Footer = () => {
 
           {/* Copyright */}
           <div>
-            ©2026 Creadent Clínica Dental. Todos los derechos reservados.
+            ©{new Date().getFullYear()} Creadent Clínica Dental. Todos los derechos reservados.
           </div>
 
-          {/* Menú Legal & Redes */}
+          {/* Menú Redes Sociales */}
           <div className="flex items-center gap-6">
-            <Link href="#servicios" className="hover:text-white transition-colors">
-              Servicios
-            </Link>
-            <Link href="#nosotros" className="hover:text-white transition-colors">
-              Nosotros
-            </Link>
-            <Link href="#contacto" className="hover:text-white transition-colors">
-              Contacto
-            </Link>
             <a
-                href="https://wa.me/524662134317"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors ml-2"
+              href="https://www.instagram.com/creadentmx/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
             >
-            <MessageCircle className="w-4 h-4" />
+              Instagram
+            </a>
+            <a
+              href="https://facebook.com/creadentclinica"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Facebook
+            </a>
+            <a
+              href="https://wa.me/524662134317"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors flex items-center gap-1.5"
+            >
+              WhatsApp
+              <MessageCircle className="w-4 h-4" />
             </a>
           </div>
 

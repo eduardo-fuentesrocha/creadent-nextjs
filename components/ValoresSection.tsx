@@ -18,11 +18,6 @@ const VALORES = [
     frase: 'Cada detalle importa. Nuestra dedicación se refleja en el cuidado con el que abordamos cada pieza dental',
     descripcion: 'Apostamos por la tecnología más avanzada para garantizar soluciones innovadoras en prótesis dentales.',
   },
-  {
-    titulo: 'Solvencia',
-    frase: 'La confianza se construye en el día a día, con cada entrega de proyecto',
-    descripcion: 'Cada prótesis se somete a estrictos controles de calidad para asegurar un ajuste perfecto y funcionalidad óptima.',
-  },
 ];
 
 export const ValoresSection = () => {

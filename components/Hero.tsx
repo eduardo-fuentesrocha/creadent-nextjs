@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { Logo } from './Logo';
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -118,7 +119,7 @@ export const Hero = () => {
       ref={containerRef}
       className="relative w-full min-h-[100dvh] bg-[#4D12FF] text-white flex flex-col items-center justify-center overflow-hidden px-4"
     >
-      {/* Fondo con Haces de Luz SVG (posicionado absolutamente sin interferir en flex) */}
+      {/* Fondo con Haces de Luz SVG */}
       <div className="absolute inset-0 pointer-events-none flex justify-center items-start">
         <svg viewBox="0 0 1000 800" fill="none" className="w-full max-w-5xl h-full opacity-30">
           <path className="light-beam" d="M 450 0 L 250 800 L 380 800 Z" fill="url(#lightGradient)" />
@@ -132,10 +133,10 @@ export const Hero = () => {
         </svg>
       </div>
 
-      {/* Contenido Principal perfectamente centrado */}
+      {/* Contenido Principal */}
       <div className="relative z-10 text-center select-none flex flex-col items-center justify-center -mt-6">
         
-        {/* Línea 1: "Diseñamos tu mejor" (Ajustado para que quepa en un solo renglón en móviles) */}
+        {/* Línea 1: "Diseñamos tu mejor" */}
         <div className="text-2xl sm:text-5xl md:text-7xl font-light tracking-tight flex items-center justify-center gap-1.5 sm:gap-3 whitespace-nowrap">
           <span>{splitText('Diseñamos')}</span>
           
@@ -163,9 +164,9 @@ export const Hero = () => {
         <nav className="flex items-center gap-4 sm:gap-6 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl text-xs sm:text-sm font-light text-white">
           <Link
             href="/"
-            className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white text-[#4D12FF] flex items-center justify-center font-bold text-sm sm:text-base hover:scale-105 transition-transform"
+            className="flex items-center justify-center hover:scale-105 transition-transform shrink-0"
           >
-            CD
+            <Logo className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
           </Link>
           <Link href="#servicios" className="hover:text-white/70 transition-colors">
             Servicios

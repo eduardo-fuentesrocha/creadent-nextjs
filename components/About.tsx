@@ -56,7 +56,7 @@ export const About = () => {
   return (
     <section
       ref={containerRef}
-      id="nosotros"
+      id=""
       className="w-full py-24 px-6 md:px-16 bg-[#C2B8FF] text-[#4D12FF] relative z-10 transition-colors duration-700"
     >
       <div className="max-w-7xl mx-auto space-y-16">
@@ -64,7 +64,7 @@ export const About = () => {
         {/* Badge superior */}
         <div className="about-badge flex items-center gap-2">
           <span className="text-xs md:text-sm font-light uppercase tracking-wider text-[#4D12FF]/70">
-            Nosotros
+            Laboratorio
           </span>
         </div>
 
@@ -92,7 +92,7 @@ export const About = () => {
           <div className="about-card p-6 md:p-8 rounded-3xl backdrop-blur-md bg-white/40 border border-[#4D12FF]/15 shadow-lg space-y-3">
             <h3 className="text-xl md:text-2xl font-light tracking-tight">Experiencia</h3>
             <p className="text-xs md:text-sm font-light text-[#4D12FF]/80 leading-relaxed">
-              Más de una década diseñando piezas dentales con los estándares de precisión más exigentes del sector.
+              Más de cinco años diseñando piezas dentales con los estándares de precisión más exigentes del sector.
             </p>
           </div>
 
