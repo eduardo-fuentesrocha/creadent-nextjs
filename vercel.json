@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.creadent.vercel.app"
+        }
+      ],
+      "destination": "https://creadent.vercel.app/:path*",
+      "permanent": true
+    }
+  ]
+}
