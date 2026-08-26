@@ -62,9 +62,15 @@ export const Hero = () => {
         '-=1.0'
       );
 
-      // TRANSFORMACIÓN A SONRISA
+      // TRANSFORMACIÓN A SONRISA (Responsive)
       const smileChars = gsap.utils.toArray<HTMLElement>('.smile-char');
       const total = smileChars.length;
+      const isMobile = window.innerWidth < 640;
+
+      // Valores ajustados proporcionalmente según el viewport
+      const yOffset = isMobile ? -14 : -32; 
+      const yBase = isMobile ? 14 : 32;
+      const rotationAmount = isMobile ? -10 : -22;
 
       tl.to(
         smileChars,
@@ -74,11 +80,11 @@ export const Hero = () => {
           stagger: 0.03,
           y: (i) => {
             const x = (i / (total - 1)) * 2 - 1;
-            return Math.pow(x, 2) * -32 + 32;
+            return Math.pow(x, 2) * yOffset + yBase;
           },
           rotation: (i) => {
             const x = (i / (total - 1)) * 2 - 1;
-            return x * -22;
+            return x * rotationAmount;
           },
         },
         '+=0.2'
